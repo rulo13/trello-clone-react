@@ -15,6 +15,7 @@ class Signup extends Component {
       }
     }
   }
+
   render() {
     return (
       <div id="signup-form">
@@ -44,9 +45,9 @@ class Signup extends Component {
               </span>
             </div>
           </div>
-          <input type="submit" disabled={this.state.diableSignupButton} className='button is-primary'/>
+          <input type="submit" value='Create Account' disabled={this.state.diableSignupButton} className='button is-primary'/>
         </form>
-        <p>Already have an account? Log in</p>
+        <p>Already have an account? <a href="/login">Log in</a></p>
       </div>
     );
   }
@@ -57,7 +58,7 @@ class Signup extends Component {
       headers: {'Access-Control-Allow-Origin': '*'},
     })
       .then(res => {
-
+        this.props.history.push('/login');
       })
       .catch(error => {
 

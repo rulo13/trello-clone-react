@@ -1,0 +1,10 @@
+#login-form {
+  max-width: 585px;
+  height: 280px;
+  margin: auto;
+  top: 0;
+  bottom: 20%;
+  left: 0;
+  right: 0;
+  position: fixed;
+}
