@@ -16,6 +16,12 @@ class Signup extends Component {
     }
   }
 
+  componentWillMount() {
+    if (localStorage.getItem('token')) {
+      this.props.history.push('/home')
+    }
+  }
+
   render() {
     return (
       <div id="signup-form">

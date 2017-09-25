@@ -7,9 +7,9 @@ import 'font-awesome/css/font-awesome.min.css'
 import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(
-  <section className="section">
     <div className="container">
-    <Routes />
+      <Routes />
     </div>
-  </section>, document.getElementById('root'));
+  // <section className="section"></section>
+  , document.getElementById('root'));
 registerServiceWorker();

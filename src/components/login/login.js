@@ -15,6 +15,12 @@ class Login extends Component {
     }
   }
 
+  componentWillMount() {
+    if (localStorage.getItem('token')) {
+      this.props.history.push('/home')
+    }
+  }
+
   render() {
     return (
       <div id='login-form'>
@@ -55,6 +61,7 @@ class Login extends Component {
     })
       .then(res => {
         this.saveTokenToLocalStorage(res.data.token);
+        this.props.history.push('/home');
       })
       .catch(error => {
         console.log(error);
