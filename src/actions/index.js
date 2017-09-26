@@ -3,7 +3,8 @@ import {
   FETCH_BOARD_FULFILLED,
   LOGIN,
   LOGIN_SUCCESSFUL,
-  LOGOUT
+  LOGOUT,
+  GET_CURRENT_USER
 } from '../constants';
 
 export const fetchBoards = () => ({
@@ -17,6 +18,10 @@ export const login = (user) => ({
   type: LOGIN,
   payload: {user}
 });
+export const getCurrentUser = payload => ({
+  type: GET_CURRENT_USER,
+  payload
+})
 export const loginSuccessful = payload => ({
   type: LOGIN_SUCCESSFUL,
   payload

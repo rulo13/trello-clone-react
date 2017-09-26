@@ -11,7 +11,7 @@ const middleware = routerMiddleware(history);
 const observableMiddleware = createEpicMiddleware(rootEpic);
 const initalState = {
   boards: [],
-  currentUser: localStorage.getItem('token') || {}
+  currentUser: {token: localStorage.getItem('token') || {}}
 }
 
 export const store = createStore(

@@ -1,25 +1,23 @@
 import { ajax } from 'rxjs/observable/dom/ajax';
-import { Observable } from 'rxjs';
-import { loginSuccessful } from '../actions'
-import { LOGIN } from '../constants';
+import { push } from 'react-router-redux';
+import { loginSuccessful, getCurrentUser } from '../actions'
+import { LOGIN, GET_CURRENT_USER } from '../constants';
 
-const fetchBoardsEpic = (action$, store) =>{
+const loginEpic = (action$, store) =>
   action$.ofType(LOGIN)
     .mergeMap(action =>
       ajax.post(`http://127.0.0.1:3333/login/`,action.payload.user, {
         'Access-Control-Allow-Origin': '*'
       })
-      .map(response => loginSuccessful(response))
-      // .toPromise()
-      // .then(response => {
-      //   console.log(store.getState())
-      //   //action.payload.routerHistory.push('/home');
-      //   return Observable.from(loginSuccessful(response));
-      // })
-      // .catch(err => {
-      //   console.log(err)
-      // })
+        .toPromise()
+        .then(res => {
+          localStorage.setItem('token', res.response.token);
+          return (loginSuccessful(res.response.token));
+        })
+      .catch(err => {
+        console.log(err)
+      })
     );
-}
 
-export default fetchBoardsEpic;
+
+export default loginEpic;
