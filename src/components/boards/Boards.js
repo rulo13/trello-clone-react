@@ -1,8 +1,20 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Header from '../header/header';
 
 class Boards extends Component {
-  state = {  }
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentWillMount() {
+    const user = this.props.user
+    if (Object.keys(user).length === 0 && user.constructor === Object) {
+      this.props.history.push('/login');
+    }
+  }
+
   render() {
     return (
       <div>
@@ -15,4 +27,8 @@ class Boards extends Component {
   }
 }
 
-export default Boards;
+const mapStateToProps = (state) => ({ user: state.currentUser});
+
+const HomePage = connect(mapStateToProps)(Boards);
+
+export default HomePage;;

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Axios from 'axios';
+import { connect } from 'react-redux';
+import { login } from '../../actions';
 import './login.css';
 
 class Login extends Component {
@@ -56,16 +57,7 @@ class Login extends Component {
 
   login = (e) => {
     e.preventDefault();
-    Axios.post('http://127.0.0.1:3333/login', this.state.user, {
-      headers: {'Access-Control-Allow-Origin': '*'},
-    })
-      .then(res => {
-        this.saveTokenToLocalStorage(res.data.token);
-        this.props.history.push('/home');
-      })
-      .catch(error => {
-        console.log(error);
-      })
+    this.props.onLogin(this.state.user);
   }
 
   saveTokenToLocalStorage(token) {
@@ -80,4 +72,13 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onLogin: user => {
+      dispatch(login(user))
+    }
+  }
+}
+
+const LoginPage = connect(null, mapDispatchToProps)(Login);
+export default LoginPage
